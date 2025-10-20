@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RedattoLAB - Marketing Imobiliário Focado em Conversão</title>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #daa520;
+            --gold-light: #ffcc66;
+            --blue-dark: #084d6e;
+            --black: #000000;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--white);
+            line-height: 1.7;
+            background: var(--black);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Sticky CTA Mobile */
+        .sticky-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            padding: 12px 20px;
+            z-index: 1000;
+            box-shadow: 0 -4px 20px rgba(218, 165, 32, 0.4);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            display: none;
+        }
+
+        .sticky-cta.visible {
+            transform: translateY(0);
+        }
+
+        .sticky-cta a {
+            display: block;
+            text-align: center;
+            color: var(--black);
+            font-weight: 700;
+            font-size: 1.1em;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .sticky-cta {
+                display: block;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated Background Particles */
+        .bg-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-30px) translateX(20px); }
+            50% { transform: translateY(-60px) translateX(-20px); }
+            75% { transform: translateY(-30px) translateX(10px); }
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Urbanist', sans-serif;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            background: linear-gradient(135deg, var(--white) 0%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 24px;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            color: var(--white);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        /* Hero Section */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(ellipse at top, rgba(8, 77, 110, 0.3) 0%, var(--black) 60%);
+            position: relative;
+        }
+
+        .logo {
+            max-width: 400px;
+            width: 90%;
+            height: auto;
+            margin: 0 auto 30px;
+            filter: drop-shadow(0 10px 40px rgba(218, 165, 32, 0.4));
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--gold);
+            font-weight: 600;
+            margin-top: 20px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            color: var(--black);
+            padding: 18px 48px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            font-weight: 800;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 40px rgba(218, 165, 32, 0.3);
+            position: relative;
+            overflow: hidden;
+            margin-top: 30px;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(218, 165, 32, 0.5);
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(218, 165, 32, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 60px rgba(218, 165, 32, 0.3);
+        }
+
+        .glass-card:hover::before {
+            left: 100%;
+        }
+
+        /* Problem Section */
+        #problem {
+            background: linear-gradient(180deg, var(--blue-dark) 0%, var(--black) 100%);
+        }
+
+        .stat-box {
+            text-align: center;
+            margin: 30px auto;
+            max-width: 800px;
+        }
+
+        .stat-number {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        /* Plans specific grid - 3 columns */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Mobile First */
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        @media (min-width: 769px) {
+            .plans-grid {
+                grid-template-columns: repeat(3, 1fr); /* 3 colunas para desktop */
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .grid-4 {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .plans-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Founder Section */
+        .founder-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 60px;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .founder-photo {
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 1;
+            border-radius: 30px;
+            object-fit: cover;
+            border: 4px solid var(--gold);
+            box-shadow: 0 30px 80px rgba(218, 165, 32, 0.4);
+            transition: all 0.5s ease;
+        }
+
+        .founder-photo:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 40px 100px rgba(218, 165, 32, 0.6);
+        }
+
+        .cert-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .cert-badge {
+            background: rgba(8, 77, 110, 0.6);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .cert-badge:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: scale(1.1);
+            border-color: var(--gold-light);
+        }
+
+        /* Pioneer Offer */
+        .pioneer-box {
+            background: linear-gradient(135deg, rgba(218, 165, 32, 0.2) 0%, rgba(8, 77, 110, 0.3) 100%);
+            border: 2px solid var(--gold);
+            border-radius: 30px;
+            padding: 50px;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pioneer-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(218, 165, 32, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        /* Plans Section */
+        .plan-card {
+            background: rgba(8, 77, 110, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            border-color: var(--gold);
+            box-shadow: 0 30px 80px rgba(218, 165, 32, 0.4);
+        }
+
+        .plan-card.featured {
+            border: 3px solid var(--gold);
+            background: rgba(218, 165, 32, 0.15);
+            transform: scale(1.05);
+        }
+
+        .plan-card.featured:hover {
+            transform: translateY(-15px) scale(1.08);
+        }
+
+        .plan-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--black);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .price-old {
+            text-decoration: line-through;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+
+        .price-new {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 900;
+            color: var(--white);
+            margin: 10px 0;
+        }
+
+        .price-economy {
+            background: rgba(218, 165, 32, 0.2);
+            color: var(--gold);
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 0.95em;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .plan-features {
+            list-style: none;
+            text-align: left;
+            margin-top: 30px;
+        }
+
+        .plan-features li {
+            padding: 12px 0 12px 35px;
+            position: relative;
+            font-size: 1em;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+
+        .plan-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: 900;
+            font-size: 1.4em;
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: var(--gold);
+        }
+
+        .faq-question {
+            padding: 25px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: var(--gold);
+        }
+
+        .faq-icon {
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+            color: var(--gold);
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 30px;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 30px 25px 30px;
+        }
+
+        .faq-answer p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            section {
+                padding: 50px 0;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .founder-layout {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .founder-photo {
+                margin: 0 auto;
+                max-width: 280px;
+            }
+
+            .grid-2, .grid-3, .grid-4 {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .pioneer-box {
+                padding: 30px 20px;
+            }
+
+            .plan-card.featured {
+                transform: scale(1);
+            }
+
+            .cert-badges {
+                justify-content: center;
+            }
+
+            .glass-card {
+                padding: 25px;
+            }
+
+            .faq-question {
+                padding: 20px;
+                font-size: 1em;
+            }
+
+            .faq-answer {
+                padding: 0 20px;
+            }
+
+            .faq-item.active .faq-answer {
+                padding: 0 20px 20px 20px;
+            }
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        .mt-40 {
+            margin-top: 40px;
+        }
+
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .max-w-800 {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Background Sections */
+        #proposta {
+            background: linear-gradient(180deg, var(--black) 0%, var(--blue-dark) 100%);
+        }
+
+        #founder {
+            background: linear-gradient(180deg, var(--blue-dark) 0%, var(--black) 100%);
+        }
+
+        #diferencial {
+            background: linear-gradient(180deg, var(--black) 0%, var(--blue-dark) 100%);
+        }
+
+        #team {
+            background: linear-gradient(180deg, var(--blue-dark) 0%, var(--black) 100%);
+        }
+
+        #work-process {
+            background: linear-gradient(180deg, var(--black) 0%, var(--blue-dark) 100%);
+        }
+
+        #plans {
+            background: linear-gradient(180deg, var(--blue-dark) 0%, var(--black) 100%);
+        }
+
+        #faq {
+            background: linear-gradient(180deg, var(--black) 0%, var(--blue-dark) 100%);
+        }
+
+        #contact {
+            background: linear-gradient(180deg, var(--blue-dark) 0%, var(--black) 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="sticky-cta" id="stickyCta">
+        <a href="https://wa.me/5548999867086" target="_blank">💬 Quero ser pioneiro!</a>
+    </div>
+
+    <main>
+        <section id="hero">
+            <div class="bg-particles">
+                <div class="particle" style="width: 4px; height: 4px; top: 20%; left: 10%; animation-delay: 0s;"></div>
+                <div class="particle" style="width: 6px; height: 6px; top: 60%; left: 80%; animation-delay: 3s;"></div>
+                <div class="particle" style="width: 3px; height: 3px; top: 40%; left: 60%; animation-delay: 6s;"></div>
+                <div class="particle" style="width: 5px; height: 5px; top: 80%; left: 30%; animation-delay: 9s;"></div>
+            </div>
+            <div class="container">
+                <img src="https://redattolab.com.br/wp-content/uploads/2025/09/RedattoLAB-400-x-150-px.png" alt="RedattoLAB" class="logo">
+                <h1>Estratégias avançadas de crescimento</h1>
+                <p class="hero-subtitle">Do terreno ao topo: inteligência digital para conversão imobiliária</p>
+                <a href="https://wa.me/5548999867086" target="_blank" class="cta-button">Fale com Sérgio →</a>
+            </div>
+        </section>
+
+        <section id="problem">
+            <div class="container">
+                <h2 class="fade-in">O problema</h2>
+                <div class="stat-box glass-card fade-in">
+                    <div class="stat-number">80%</div>
+                    <p style="font-size: 1.3em;">das empresas do setor imobiliário investem em marketing digital...</p>
+                </div>
+                <div class="stat-box glass-card fade-in">
+                    <div class="stat-number">20%</div>
+                    <p style="font-size: 1.3em;">...mas apenas <span class="highlight">poucas conseguem resultados satisfatórios. E pouquíssimas acima da média</span></p>
+                </div>
+                <div class="stat-box glass-card fade-in">
+                    <h3 style="color: white; font-size: 2em;">Por quê?</h3>
+                    <p style="font-size: 1.4em; font-weight: 600;">Foco em volume, não em qualidade.</p>
+                    <p>Enquanto outras agências perseguem likes e seguidores, seus leads continuam frios e suas vendas, fracas.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="proposta">
+            <div class="container">
+                <h2 class="fade-in">Nossa proposta</h2>
+                <div class="plans-grid">
+                    <div class="glass-card fade-in">
+                        <h3>Leads que convertem</h3>
+                        <p>Não queremos curiosos. Queremos compradores prontos para iniciar a jornada e fechar negócio desde o primeiro contato.</p>
+                    </div>
+                    <div class="glass-card fade-in">
+                        <h3>Menos desperdício</h3>
+                        <p>Cada real investido em anúncios é otimizado para retorno máximo. Sem dinheiro jogado fora.</p>
+                    </div>
+                    <div class="glass-card fade-in">
+                        <h3>Estratégia personalizada</h3>
+                        <p>Pacotes com entregáveis claros, mas estratégia 100% sob medida. Combinamos e adaptamos cada elemento para seus objetivos específicos.</p>
+                    </div>
+                </div>
+                <div class="glass-card mt-40 fade-in" style="border: 2px solid var(--gold);">
+                    <h3 style="color: white; text-align: center; font-size: 2em;">Garantia de 90 dias: sua decisão sem riscos.</h3>
+                    <p class="text-center" style="font-size: 1.2em;">Confiamos tanto em nossa metodologia que oferecemos: se não houver resultados em 90 dias, você pode sair sem custo, reestruturar sua estratégia conosco ou receber 30% de desconto na próxima mensalidade. Seu sucesso é o nosso compromisso.</p>
+                    <div class="text-center mt-20">
+                        <a href="https://wa.me/5548999867086" target="_blank" class="cta-button">Garanta sua vaga agora →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="founder">
+            <div class="container">
+                <h2 class="fade-in">Quem lidera</h2>
+                <div class="founder-layout fade-in">
+                    <img src="https://redattolab.com.br/wp-content/uploads/2025/10/82ae18c5-39dc-451a-98da-c62bae96bcff.png" alt="Melina Menezes Pereda" class="founder-photo">
+                    <div>
+                        <h3 style="font-size: 2.2em;">Melina Menezes Pereda</h3>
+                        <p style="color: var(--gold); font-size: 1.3em; font-weight: 600; margin-bottom: 30px;">Estrategista de conteúdos e conversão</p>
+                        
+                        <div class="glass-card mb-20">
+                            <p><span class="highlight">Mais de uma década</span> de experiência em marketing de conteúdos focado em conversão, gerando valor para empresas do ramo imobiliário e tecnológico.</p>
+                        </div>
+                        
+                        <div class="glass-card mb-20">
+                            <p><span class="highlight">Especialista em mercados de alto valor de transação</span> e com profundo conhecimento do dinâmico mercado imobiliário.</p>
+                        </div>
+                        
+                        <div class="glass-card mb-20">
+                            <p><span class="highlight">Visão global:</span> experiência em estratégias de marketing digital em mercados desafiadores na América Latina.</p>
+                        </div>
+                        
+                        <div class="glass-card mb-20">
+                            <p><span class="highlight">Comprometida com resultados:</span> construindo cases com transparência total e metodologia comprovada.</p>
+                        </div>
+
+                        <div class="cert-badges">
+                            <span class="cert-badge">Meta Blueprint</span>
+                            <span class="cert-badge">Google Ads</span>
+                            <span class="cert-badge">Google Analytics 4</span>
+                            <span class="cert-badge">Google Tag Manager</span>
+                            <span class="cert-badge">HubSpot</span>
+                            <span class="cert-badge">SEMrush Academy</span>
+                            <span class="cert-badge">RD Station</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="diferencial">
+            <div class="container">
+                <h2 class="fade-in">Por que RedattoLAB é diferente</h2>
+                <p class="text-center max-w-800 fade-in" style="font-size: 1.3em; margin-bottom: 40px;">Enquanto outras agências prometem números mágicos, nós entregamos transparência, metodologia e compromisso real com seus resultados.</p>
+                
+                <div class="grid-2">
+                    <div class="glass-card fade-in">
+                        <span style="font-size: 3em;">🎯</span>
+                        <h3>Transparência total</h3>
+                        <p>Dashboard em tempo real, reuniões periódicas e acesso completo a todas as métricas. Você vê exatamente onde cada real está sendo investido e qual o retorno gerado.</p>
+                    </div>
+                    
+                    <div class="glass-card fade-in">
+                        <span style="font-size: 3em;">🔒</span>
+                        <h3>Garantia real de 90 Dias</h3>
+                        <p>Não são palavras vazias. Se em 90 dias não houver resultados mensuráveis, você sai sem custo adicional ou recebe 30% de desconto. Seu risco é zero.</p>
+                    </div>
+                    
+                    <div class="glass-card fade-in">
+                        <span style="font-size: 3em;">📊</span>
+                        <h3>Foco em ROI, não vaidade</h3>
+                        <p>Embora as curtidas e os seguidores sejam importantes, prezamos pela qualidade e não quantidade. Cada estratégia é desenhada para gerar leads qualificados e vendas reais. Métricas que, de fato, impactam seu faturamento.</p>
+                    </div>
+                    
+                    <div class="glass-card fade-in">
+                        <span style="font-size: 3em;">⚡</span>
+                        <h3>Metodologia DACE® Proprietária</h3>
+                        <p>Sistema exclusivo de 4 fases (Diagnóstico, Arquitetura, Conteúdo, Escala) desenvolvido em 10+ anos de experiência para maximizar conversão.</p>
+                    </div>
+                </div>
+
+                <div class="pioneer-box fade-in">
+                    <h3 style="color: white; text-align: center; font-size: 2.5em; position: relative; z-index: 1;">🚀 Oferta especial para clientes pioneiros</h3>
+                    <p class="text-center" style="font-size: 1.3em; margin-bottom: 40px; position: relative; z-index: 1;">Estamos construindo nosso portfólio de cases documentados. Por isso, oferecemos condições exclusivas para os primeiros clientes que acreditarem em nossa metodologia.</p>
+                    
+                    <div class="grid-2" style="position: relative; z-index: 1;">
+                        <div class="glass-card" style="border-left: 4px solid var(--gold);">
+                            <h3 style="font-size: 1.5em;">✅ 30% de desconto</h3>
+                            <p>Nos primeiros 90 dias de qualquer plano. Economia real para testar nossa metodologia com investimento reduzido.</p>
+                        </div>
+                        
+                        <div class="glass-card" style="border-left: 4px solid var(--gold);">
+                            <h3 style="font-size: 1.5em;">✅ Setup GRÁTIS</h3>
+                            <p>R$ 997 de economia. Toda a estrutura técnica e estratégica montada sem custo adicional.</p>
+                        </div>
+                        
+                        <div class="glass-card" style="border-left: 4px solid var(--gold);">
+                            <h3 style="font-size: 1.5em;">✅ Prioridade absoluta</h3>
+                            <p>Atendimento VIP com resposta em até 2h úteis e reuniões semanais de acompanhamento nos primeiros 90 dias.</p>
+                        </div>
+                        
+                        <div class="glass-card" style="border-left: 4px solid var(--gold);">
+                            <h3 style="font-size: 1.5em;">✅ Garantia tripla</h3>
+                            <p>Sem resultados em 90 dias? Escolha: sair sem custo, reestruturar estratégia ou 30% OFF no próximo período ou primeiro mês de renovação do plano.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-card mt-40" style="background: rgba(8, 77, 110, 0.4); position: relative; z-index: 1;">
+                        <h3 style="color: white; text-align: center; font-size: 1.8em; margin-bottom: 20px;">Em troca, pedimos apenas:</h3>
+                        <p class="text-center" style="font-size: 1.15em;">📹 Permissão para documentar sua jornada e resultados</p>
+                        <p class="text-center" style="font-size: 1.15em;">💬 Depoimento honesto sobre a experiência (positivo ou construtivo)</p>
+                        <p class="text-center" style="font-size: 1.15em;">📊 Autorização para usar métricas reais em materiais de marketing</p>
+                        <p class="text-center" style="font-size: 1.5em; margin-top: 30px; color: var(--gold); font-weight: 700;">Vagas limitadas: apenas 5 clientes pioneiros</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="team">
+            <div class="container">
+                <h2 class="fade-in">Time curado: a inteligência por trás dos seus resultados</h2>
+                <p class="text-center max-w-800 fade-in" style="font-size: 1.3em; margin-bottom: 40px;">Nossa equipe é composta por especialistas selecionados a dedo, com experiência real e resultados comprovados, dedicados a impulsionar sua marca no mercado imobiliário.</p>
+                <div class="grid-2">
+                    <div class="glass-card fade-in">
+                        <h3>Especialistas selecionados</h3>
+                        <p>Cada profissional tem no mínimo 3-5 anos de experiência comprovada em suas áreas de atuação, garantindo excelência.</p>
+                    </div>
+                    <div class="glass-card fade-in">
+                        <h3>Zero juniores</h3>
+                        <p>Sua empresa merece profissionais experientes. Trabalhamos apenas com quem já provou resultados e domina o mercado.</p>
+                    </div>
+                    <div class="glass-card fade-in">
+                        <h3>Foco total em conversão</h3>
+                        <p>Cada parceiro é escolhido por seu alinhamento com nossa filosofia: entregar resultados concretos, não apenas tarefas.</p>
+                    </div>
+                    <div class="glass-card fade-in">
+                        <h3>Estrutura ágil e eficiente</h3>
+                        <p>Nosso modelo enxuga custos e garante que a sua estratégia seja assertiva mediante a otimização do uso de recursos. Cada centavo investido importa!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="work-process">
+            <div class="container">
+                <h2 class="fade-in">Como trabalhamos: nosso método DACE®</h2>
+                <p class="text-center fade-in" style="font-size: 1.3em; margin-bottom: 40px;">Um sistema exclusivo da RedattoLAB, desenhado para maximizar sua conversão e presença digital.</p>
+                <div class="grid-4">
+                    <div class="glass-card fade-in text-center">
+                        <div style="width: 70px; height: 70px; background: var(--gold); color: var(--black); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2em; font-weight: 900; margin: 0 auto 20px;">1</div>
+                        <h3>Diagnóstico</h3>
+                        <p>Auditoria profunda da sua presença digital, análise de concorrentes e identificação de oportunidades para seu negócio.</p>
+                    </div>
+                    <div class="glass-card fade-in text-center">
+                        <div style="width: 70px; height: 70px; background: var(--gold); color: var(--black); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2em; font-weight: 900; margin: 0 auto 20px;">2</div>
+                        <h3>Arquitetura</h3>
+                        <p>Construção da identidade visual e narrativa estratégica da sua marca, criando uma base sólida para a comunicação.</p>
+                    </div>
+                    <div class="glass-card fade-in text-center">
+                        <div style="width: 70px; height: 70px; background: var(--gold); color: var(--black); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2em; font-weight: 900; margin: 0 auto 20px;">3</div>
+                        <h3>Conteúdo</h3>
+                        <p>Produção de conteúdos estratégicos de alto impacto que ativam seus canais digitais e engajam seu público-alvo.</p>
+                    </div>
+                    <div class="glass-card fade-in text-center">
+                        <div style="width: 70px; height: 70px; background: var(--gold); color: var(--black); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2em; font-weight: 900; margin: 0 auto 20px;">4</div>
+                        <h3>Escala</h3>
+                        <p>Transformação do alcance em autoridade e leads qualificados, gerando resultados acima da média e crescimento sustentável.</p>
+                    </div>
+                </div>
+                <div class="glass-card mt-40 fade-in">
+                    <h3 style="color: white; text-align: center; margin-bottom: 30px;">Nosso compromisso com a sua conversão:</h3>
+                    <div class="max-w-800" style="text-align: left;">
+                        <p>✓ Reuniões estratégicas periódicas para alinhamento e otimização.</p>
+                        <p>✓ Foco total em métricas que realmente geram vendas, não apenas métricas de vaidade.</p>
+                        <p>✓ Dashboard em tempo real para acompanhamento transparente dos seus resultados.</p>
+                        <p>✓ Transparência total em cada investimento e resultado alcançado.</p>
+                        <p>✓ Atendimento prioritário para garantir agilidade e suporte contínuo.</p>
+                    </div>
+                </div>
+                <div class="text-center mt-40">
+                    <a href="https://wa.me/5548999867086" target="_blank" class="cta-button">Vamos começar sua jornada →</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="plans">
+            <div class="container">
+                <h2 class="fade-in">Planos RedattoLAB: escolha seu caminho para o sucesso</h2>
+                <p class="text-center fade-in" style="font-size: 1.3em; color: var(--gold); margin-bottom: 10px;">Invista no seu futuro com condições especiais.</p>
+                <p class="text-center fade-in" style="font-size: 1.1em; margin-bottom: 50px;">Clientes pioneiros recebem 30% OFF nos primeiros 90 dias + Setup gratuito</p>
+                
+                <div class="plans-grid">
+                    <div class="plan-card fade-in">
+                        <h3 style="color: white; font-size: 2em;">Essencial</h3>
+                        <div class="price-old">De R$ 1.500</div>
+                        <div class="price-new">R$ 1.050</div>
+                        <p style="color: var(--gold); font-weight: 600; margin: 10px 0;">por mês (pioneiros)</p>
+                        <div class="price-economy">💰 Economize R$ 450/mês</div>
+                        <p style="margin: 25px 0; line-height: 1.7;">Construa uma máquina de vendas online que trabalha para você 24/7, atraindo os primeiros compradores qualificados pelo digital.</p>
+                        <ul class="plan-features">
+                            <li><strong>Tráfego pago:</strong> 1 campanha estratégica para máximo retorno</li>
+                            <li><strong>Conteúdo estratégico:</strong> 8 posts + 4 blog posts otimizados</li>
+                            <li><strong>Landing page:</strong> 1 página profissional de conversão</li>
+                            <li><strong>Relatório detalhado:</strong> análise mensal completa</li>
+                            <li><strong>Reunião mensal:</strong> 1h de planejamento e análise</li>
+                        </ul>
+                        <p style="color: var(--gold); font-style: italic; margin-top: 20px; font-size: 0.95em;">Ideal para imobiliárias iniciando no digital</p>
+                        <a href="https://wa.me/5548999867086" target="_blank" class="cta-button" style="margin-top: 30px; width: 100%; padding: 15px;">Escolher Essencial</a>
+                    </div>
+
+                    <div class="plan-card featured fade-in">
+                        <div class="plan-badge">⭐ MAIS POPULAR</div>
+                        <h3 style="color: white; font-size: 2em;">Escala</h3>
+                        <div class="price-old">De R$ 3.000</div>
+                        <div class="price-new">R$ 2.100</div>
+                        <p style="color: var(--gold); font-weight: 600; margin: 10px 0;">por mês (pioneiros)</p>
+                        <div class="price-economy">💰 Economize R$ 900/mês</div>
+                        <p style="margin: 25px 0; line-height: 1.7;">Escale suas vendas com múltiplos canais trabalhando simultaneamente e funil automatizado que nutre leads até o fechamento.</p>
+                        <ul class="plan-features">
+                            <li><strong>Tráfego multicanal:</strong> 2-3 campanhas simultâneas otimizadas</li>
+                            <li><strong>Conteúdo intensivo:</strong> 12 posts + 4 artigos + 2 newsletters</li>
+                            <li><strong>Landing page avançada:</strong> com testes A/B contínuos</li>
+                            <li><strong>Funil automatizado:</strong> 5 e-mails de nutrição</li>
+                            <li><strong>Consultoria:</strong> 2 reuniões estratégicas mensais</li>
+                        </ul>
+                        <p style="color: var(--gold); font-style: italic; margin-top: 20px; font-size: 0.95em;">Ideal para escalar e dominar o mercado local</p>
+                        <a href="https://wa.me/5548999867086" target="_blank" class="cta-button" style="margin-top: 30px; width: 100%; padding: 15px;">Escolher Escala</a>
+                    </div>
+
+                    <div class="plan-card fade-in">
+                        <h3 style="color: white; font-size: 2em;">Autoridade</h3>
+                        <div class="price-old">De R$ 4.000</div>
+                        <div class="price-new">R$ 2.800</div>
+                        <p style="color: var(--gold); font-weight: 600; margin: 10px 0;">por mês (pioneiros)</p>
+                        <div class="price-economy">💰 Economize R$ 1.200/mês</div>
+                        <p style="margin: 25px 0; line-height: 1.7;">Torne-se a escolha óbvia do mercado com estratégia premium que atrai clientes de alto valor e inteligência competitiva.</p>
+                        <ul class="plan-features">
+                            <li><strong>Tráfego premium:</strong> 4-5 campanhas + remarketing estratégico</li>
+                            <li><strong>Conteúdo de elite:</strong> 16 posts + 6 artigos SEO + 2 materiais ricos</li>
+                            <li><strong>Funil completo:</strong> 3 landing pages especializadas</li>
+                            <li><strong>Inteligência:</strong> análise mensal de concorrência</li>
+                            <li><strong>Consultoria semanal:</strong> reuniões + suporte prioritário absoluto</li>
+                        </ul>
+                        <p style="color: var(--gold); font-style: italic; margin-top: 20px; font-size: 0.95em;">Ideal para líderes que buscam diferenciação premium</p>
+                        <a href="https://wa.me/5548999867086" target="_blank" class="cta-button" style="margin-top: 30px; width: 100%; padding: 15px;">Escolher Autoridade</a>
+                    </div>
+                </div>
+
+                <div class="glass-card mt-40 fade-in" style="border: 2px solid var(--gold);">
+                    <h3 style="color: white; text-align: center; font-size: 2em;">Setup profissional: GRATUITO para clientes pioneiros</h3>
+                    <p class="text-center price-old" style="font-size: 1.3em; margin: 15px 0;">R$ 997 (à vista ou 2x de R$ 499)</p>
+                    <p class="text-center" style="font-size: 2em; color: var(--gold); font-weight: 800; margin-bottom: 25px;">100% GRATUITO</p>
+                    <p class="text-center" style="margin-bottom: 40px; font-size: 1.1em;">Em 5 a 7 dias úteis, estruturamos toda a base técnica e estratégica que impulsionará seus resultados.</p>
+                    <div class="grid-2">
+                        <div class="glass-card">
+                            <h3>Inteligência estratégica</h3>
+                            <p>Reunião de kickoff aprofundada, auditoria digital completa, análise de concorrência e definição de sua estratégia para 90 dias.</p>
+                        </div>
+                        <div class="glass-card">
+                            <h3>Configuração técnica otimizada</h3>
+                            <p>Implementação e validação de todas as ferramentas essenciais para rastreamento preciso e campanhas eficazes.</p>
+                        </div>
+                        <div class="glass-card">
+                            <h3>Ferramentas de gestão integradas</h3>
+                            <p>Dashboard personalizado e configuração de sistemas de gerenciamento de leads para otimizar seu funil de vendas.</p>
+                        </div>
+                        <div class="glass-card">
+                            <h3>Entrega estratégica e suporte</h3>
+                            <p>Guia de métricas e KPIs, processos documentados e suporte prioritário nos primeiros 15 dias para garantir sua segurança.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq">
+            <div class="container">
+                <h2 class="fade-in">Perguntas Frequentes</h2>
+                <div class="faq-container">
+                    <div class="faq-item fade-in">
+                        <div class="faq-question">
+                            <span>Quando vou começar a ver resultados?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Os primeiros resultados aparecem entre 30-60 dias após o início das campanhas. No entanto, nossa garantia de 90 dias assegura que você terá tempo suficiente para avaliar o impacto real das estratégias implementadas. Trabalhamos com métricas progressivas: primeiros leads aparecem nas primeiras semanas, otimização acontece no segundo mês, e escala no terceiro mês.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item fade-in">
+                        <div class="faq-question">
+                            <span>Posso trocar de plano durante o contrato?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sim! Você pode fazer upgrade ou downgrade do seu plano a qualquer momento. Para upgrades, a mudança é imediata e você paga apenas a diferença proporcional. Para downgrades, a mudança entra em vigor no próximo ciclo de faturamento. Mantemos total flexibilidade para acompanhar o crescimento ou ajustes da sua empresa.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item fade-in">
+                        <div class="faq-question">
+                            <span>Como funciona o cancelamento?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sim! Upgrades são imediatos mediante pagamento proporcional. Downgrades requerem permanência mínima de 3 meses no plano atual e entram em vigor no próximo ciclo, limitados a 2 ajustes anuais. Assim garantimos flexibilidade estratégica sem comprometer a continuidade dos resultados.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item fade-in">
+                        <div class="faq-question">
+                            <span>Qual o investimento necessário em mídia paga além da mensalidade?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Recomendamos um investimento mínimo de R$ 1.500 a R$ 3.000/mês em mídia paga para resultados expressivos, mas isso varia conforme seu mercado e objetivos. A mensalidade do plano cobre nossa estratégia, criação e gestão. O budget de mídia é investido diretamente nas plataformas (Google, Meta, etc.) e você tem total visibilidade através do dashboard em tempo real.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item fade-in">
+                        <div class="faq-question">
+                            <span>Vocês trabalham com qual região geográfica?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Atendemos imobiliárias e construtoras em todo o Brasil. Como trabalhamos 100% digital, a localização física não é limitante. Nosso método DACE® é adaptado para diferentes mercados regionais, considerando particularidades locais, concorrência e comportamento do consumidor em cada praça. Já temos experiência em grandes centros e cidades de médio porte.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item fade-in">
+                        <div class="faq-question">
+                            <span>O que acontece se eu não tiver site ou redes sociais ativas?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sem problema! O setup gratuito (para clientes pioneiros) inclui a estruturação básica necessária. Criamos landing pages profissionais, configuramos pixels de rastreamento e estabelecemos presença digital inicial. Se você já tem site e redes, fazemos auditoria completa e otimizamos o que existe. Nosso foco é trabalhar com o que você tem e construir o que falta.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item fade-in">
+                        <div class="faq-question">
+                            <span>Como é o acompanhamento e comunicação com o time?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Clientes pioneiros têm atendimento VIP com resposta em até 2h úteis via WhatsApp. Reuniões estratégicas variam conforme o plano: mensal (Essencial), quinzenal (Escala) ou semanal (Autoridade). Você recebe relatórios mensais detalhados e tem acesso 24/7 ao dashboard com métricas em tempo real. Transparência e comunicação são pilares do nosso trabalho.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item fade-in">
+                        <div class="faq-question">
+                            <span>Por que apenas 5 vagas pioneiras?</span>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Queremos garantir atendimento excepcional e dedicação total a cada cliente pioneiro. Com 5 vagas, conseguimos oferecer prioridade absoluta, reuniões semanais de acompanhamento e resposta em até 2h úteis. Também precisamos documentar cases reais para construir nosso portfólio. É uma oportunidade limitada para quem quer resultados premium com investimento reduzido.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2 class="fade-in">Próximos passos</h2>
+                <div class="glass-card fade-in max-w-800" style="margin: 0 auto 40px;">
+                    <p class="text-center" style="font-size: 1.3em; margin-bottom: 0;">Seu caminho para alcançar melhores resultados começa aqui.</p>
+                </div>
+                <div class="grid-2">
+                    <div class="glass-card fade-in">
+                        <h3>1. Diagnóstico gratuito</h3>
+                        <p>Uma conversa estratégica para entender seu cenário, desafios e oportunidades no mercado imobiliário.</p>
+                    </div>
+                    <div class="glass-card fade-in">
+                        <h3>2. Proposta personalizada</h3>
+                        <p>Receba uma estratégia inicial sob medida, desenhada exclusivamente para seus objetivos de conversão.</p>
+                    </div>
+                    <div class="glass-card fade-in">
+                        <h3>3. Onboarding estratégico</h3>
+                        <p>Setup profissional completo em apenas 5-7 dias e o início imediato de suas campanhas de alto impacto.</p>
+                    </div>
+                    <div class="glass-card fade-in">
+                        <h3>4. Resultados de excelência</h3>
+                        <p>Acompanhamento contínuo e a chegada constante de leads qualificados, prontos para fechar negócio.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card mt-40 fade-in text-center" style="border: 3px solid var(--gold); padding: 60px 40px;">
+                    <h2 style="color: white; font-size: 2.5em; margin-bottom: 20px;">Apenas 5 vagas para clientes pioneiros</h2>
+                    <p style="font-size: 1.3em; margin-bottom: 35px;">Fale diretamente com Sérgio e garanta sua vaga com <span class="highlight">30% OFF + Setup gratuito</span>.</p>
+                    <a href="https://wa.me/5548999867086" target="_blank" class="cta-button" style="font-size: 1.6em; padding: 22px 55px;">💬 Quero ser um cliente pioneiro!</a>
+                </div>
+
+                <div class="glass-card mt-40 fade-in">
+                    <h3 style="color: white; text-align: center; margin-bottom: 30px;">Contatos:</h3>
+                    <div style="text-align: center;">
+                        <p><strong>WhatsApp/Telefone:</strong> <a href="https://wa.me/5548999867086" target="_blank" style="color: var(--gold); text-decoration: none; font-weight: 600;">(86) 99560-1643</a></p>
+                        <p><strong>E-mail:</strong> <a href="mailto:contato@redattolab.com.br" style="color: var(--gold); text-decoration: none; font-weight: 600;">pereira_sergio2023@outlook.com</a></p>
+                        <p><strong>Instagram:</strong> <a href="https://instagram.com/redattolab" target="_blank" style="color: var(--gold); text-decoration: none; font-weight: 600;">@redattolab</a></p>
+                        <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/company/redattolab/" target="_blank" style="color: var(--gold); text-decoration: none; font-weight: 600;">linkedin.com/company/redattolab</a></p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 60px; padding-top: 30px; text-align: center;">
+                    <p style="color: var(--gold); font-size: 1.8em; font-weight: 700; margin-bottom: 15px;">RedattoLAB: do terreno ao topo.</p>
+                    <p style="font-size: 1.3em;">Inteligência digital para conversão imobiliária.</p>
+                    <p style="font-size: 1.1em; margin-top: 10px; color: rgba(255, 255, 255, 0.7);">Transparência, metodologia e resultados reais.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Scroll Animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const wasActive = item.classList.contains('active');
+                
+                // Close all items
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                
+                // Open clicked item if it wasn't active
+                if (!wasActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Sticky CTA - Show after scrolling past hero
+        const stickyCta = document.getElementById('stickyCta');
+        const heroSection = document.getElementById('hero');
+        
+        window.addEventListener('scroll', () => {
+            const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+            if (window.scrollY > heroBottom) {
+                stickyCta.classList.add('visible');
+            } else {
+                stickyCta.classList.remove('visible');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add dynamic particles
+        const particleContainer = document.querySelector('.bg-particles');
+        for (let i = 0; i < 8; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.width = `${Math.random() * 4 + 2}px`;
+            particle.style.height = particle.style.width;
+            particle.style.top = `${Math.random() * 100}%`;
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.animationDelay = `${Math.random() * 20}s`;
+            particle.style.animationDuration = `${Math.random() * 10 + 15}s`;
+            particleContainer.appendChild(particle);
+        }
+    </script>
+</body>
+</html>
